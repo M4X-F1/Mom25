@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festa della Mamma - 2025</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #ffe4e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            margin: auto;
+        }
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%; /* Circolare */
+            width: 50px; /* Dimensione circolare */
+            height: 50px; /* Dimensione circolare */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-arrow.left {
+            left: 20px;
+        }
+        .nav-arrow.right {
+            right: 20px;
+        }
+        #slide-number {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide active"> 
+        <img src="Foto/1.png" alt="Prima immagine">
+    </div>
+    <div class="slide">
+        <img src="Foto/2.png" alt="Seconda immagine">
+    </div>
+    <div class="slide">
+        <img src="Foto/3.png" alt="Terza immagine">
+    </div>
+    <div class="slide">
+        <img src="Foto/4.png" alt="Quarta immagine">
+    </div>
+    <button class="nav-arrow left" onclick="prevSlide()">❮</button>
+    <button class="nav-arrow right" onclick="nextSlide()">❯</button>
+    <div id="slide-number">
+        1 / 4
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const slideNumber = document.getElementById('slide-number');
+
+        function updateSlideNumber() {
+            slideNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            updateSlideNumber();
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        updateSlideNumber();
+    </script>
+</body>
+</html>
